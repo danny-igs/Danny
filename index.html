@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circuitos eléctricos · Teoría</title>
+<meta name="description" content="Qué es un circuito eléctrico, sus componentes y la diferencia entre circuitos en serie, en paralelo y mixtos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&family=Chakra+Petch:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Símbolos reutilizables (imágenes de componentes) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="c-res"><rect x="-30" y="-10" width="60" height="20" fill="var(--board)" stroke="none"/><path d="M-30 0L-22 0L-17-10L-7 10L3-10L13 10L18 0L30 0"/></g>
+    <g id="c-bat"><path d="M0-30V-8M-14-8H14M0 8V30"/><path d="M-8 8H8" stroke-width="7"/><path d="M-26-22h8M-22-26v8" stroke-width="2"/></g>
+    <g id="c-sw"><path d="M-30 0H-12M12 0H30M-12 0L10-14"/><circle cx="-12" r="3"/><circle cx="12" r="3"/></g>
+    <g id="c-bulb"><circle r="14" fill="var(--board)"/><path d="M-10-10L10 10M-10 10L10-10M-30 0H-14M14 0H30"/></g>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 34 34" fill="none" stroke="#e2a84b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17h8l4-9 4 18 4-9h8"/></svg>
+      Circuitos
+    </a>
+    <nav aria-label="Principal">
+      <a href="#que-es">Qué es</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#tipos">Tipos</a>
+      <a href="#video">Video</a>
+      <a href="simulador.html">Simulador</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <h1>Circuitos eléctricos</h1>
+    <p class="lead">El camino cerrado que recorre la corriente: sale de la fuente, atraviesa cada componente y vuelve al punto de partida.</p>
+    <div class="cta">
+      <a class="btn solid" href="#que-es">Empezar a leer</a>
+      <a class="btn" href="simulador.html">Abrir el simulador</a>
+    </div>
+    <svg class="hero-art" viewBox="0 0 720 220" aria-hidden="true">
+      <path class="trace" pathLength="1000" d="M0 40H180L220 80H420L460 40H720"/>
+      <path class="trace" pathLength="1000" d="M0 110H120L160 150H340L380 110H720"/>
+      <path class="trace" pathLength="1000" d="M0 180H260L300 140H560L600 180H720"/>
+      <path class="pulse" pathLength="1000" d="M0 40H180L220 80H420L460 40H720"/>
+      <path class="pulse" pathLength="1000" d="M0 110H120L160 150H340L380 110H720"/>
+      <path class="pulse" pathLength="1000" d="M0 180H260L300 140H560L600 180H720"/>
+      <circle class="pad" cx="180" cy="40" r="9"/><circle class="pad" cx="420" cy="80" r="9"/>
+      <circle class="pad" cx="160" cy="150" r="9"/><circle class="pad" cx="380" cy="110" r="9"/>
+      <circle class="pad" cx="300" cy="140" r="9"/><circle class="pad" cx="600" cy="180" r="9"/>
+    </svg>
+  </div>
+
+  <section id="que-es">
+    <div class="wrap">
+      <h2>¿Qué es un circuito?</h2>
+      <p>Un circuito eléctrico es un conjunto de elementos conectados por conductores que forman un lazo cerrado. Si el lazo se abre en cualquier punto, por ejemplo con un interruptor, la corriente se detiene.</p>
+      <p>Para describirlo se usan tres magnitudes que siempre aparecen juntas:</p>
+      <dl class="mag">
+        <div><dt>V</dt><dd>Voltaje · voltios (V)</dd><dd>La "presión" que empuja a las cargas. Lo entrega la fuente, como una pila o una batería.</dd></div>
+        <div><dt>I</dt><dd>Corriente · amperios (A)</dd><dd>La cantidad de carga que pasa por un punto cada segundo.</dd></div>
+        <div><dt>R</dt><dd>Resistencia · ohmios (Ω)</dd><dd>Qué tanto se opone un componente al paso de la corriente.</dd></div>
+      </dl>
+      <p class="formula" style="margin-top:1.4rem">Ley de Ohm: V = I × R</p>
+      <p>Si conoces dos de las tres magnitudes, puedes calcular la tercera. La potencia que consume un componente es P = V × I.</p>
+
+      <div class="ohm">
+        <h3>Calculadora de la ley de Ohm</h3>
+        <div class="fields">
+          <label class="f">Voltaje (V)<input id="ov" type="number" min="0" step="any" value="9" inputmode="decimal"></label>
+          <label class="f">Resistencia (Ω)<input id="or" type="number" min="0" step="any" value="330" inputmode="decimal"></label>
+        </div>
+        <output id="oo" aria-live="polite"></output>
+      </div>
+    </div>
+  </section>
+
+  <section id="componentes">
+    <div class="wrap">
+      <h2>Componentes básicos</h2>
+      <p>Cada componente tiene un símbolo normalizado, para que cualquier persona pueda leer un esquema sin importar el idioma.</p>
+      <div class="parts">
+        <article>
+          <svg class="sym" viewBox="-40 -36 80 72" role="img" aria-label="Símbolo de pila"><use href="#c-bat"/></svg>
+          <h3>Fuente</h3>
+          <p>Pila o batería. Mantiene una diferencia de voltaje entre sus dos polos.</p>
+        </article>
+        <article>
+          <svg class="sym" viewBox="-40 -36 80 72" role="img" aria-label="Símbolo de resistencia"><use href="#c-res"/></svg>
+          <h3>Resistencia</h3>
+          <p>Limita la corriente y convierte parte de la energía en calor.</p>
+        </article>
+        <article>
+          <svg class="sym" viewBox="-40 -36 80 72" role="img" aria-label="Símbolo de interruptor"><use href="#c-sw"/></svg>
+          <h3>Interruptor</h3>
+          <p>Abre o cierra el lazo. Abierto no pasa corriente; cerrado, sí.</p>
+        </article>
+        <article>
+          <svg class="sym" viewBox="-40 -36 80 72" role="img" aria-label="Símbolo de bombilla"><use href="#c-bulb"/></svg>
+          <h3>Bombilla</h3>
+          <p>Transforma energía eléctrica en luz. Se comporta como una resistencia.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tipos">
+    <div class="wrap">
+      <h2>Serie, paralelo y mixto</h2>
+      <p>Lo que cambia es la forma de conectar los componentes, y con ella cómo se reparten el voltaje y la corriente.</p>
+
+      <div class="type">
+        <div class="fig">
+          <svg viewBox="0 0 320 180" role="img" aria-label="Circuito en serie con dos resistencias">
+            <path class="w" d="M50 60V30H270V150H50V120"/>
+            <g class="sym"><use href="#c-bat" transform="translate(50,90)"/><use href="#c-res" transform="translate(115,30)"/><use href="#c-res" transform="translate(205,30)"/></g>
+            <text x="115" y="14" text-anchor="middle">R1</text><text x="205" y="14" text-anchor="middle">R2</text>
+          </svg>
+        </div>
+        <div>
+          <h3>Circuito en serie</h3>
+          <p>Los componentes están uno detrás de otro, en un único camino.</p>
+          <p class="formula">Rt = R1 + R2 + …</p>
+          <ul>
+            <li>La corriente es la misma en todos.</li>
+            <li>El voltaje de la fuente se reparte entre ellos.</li>
+            <li>Si uno se corta, todo el circuito se apaga: así funcionaban las luces antiguas de Navidad.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="type">
+        <div class="fig">
+          <svg viewBox="0 0 320 180" role="img" aria-label="Circuito en paralelo con dos resistencias">
+            <path class="w" d="M50 60V30H220M50 120V150H220M130 30V150M220 30V150"/>
+            <circle class="dot" cx="130" cy="30" r="5"/><circle class="dot" cx="130" cy="150" r="5"/>
+            <g class="sym"><use href="#c-bat" transform="translate(50,90)"/><use href="#c-res" transform="translate(130,90) rotate(90)"/><use href="#c-res" transform="translate(220,90) rotate(90)"/></g>
+            <text x="156" y="94">R1</text><text x="246" y="94">R2</text>
+          </svg>
+        </div>
+        <div>
+          <h3>Circuito en paralelo</h3>
+          <p>Cada componente tiene su propia rama conectada a los mismos dos puntos.</p>
+          <p class="formula">1/Rt = 1/R1 + 1/R2 + …</p>
+          <ul>
+            <li>El voltaje es el mismo en todas las ramas.</li>
+            <li>La corriente total se divide entre las ramas.</li>
+            <li>Si una rama falla, las demás siguen funcionando: así está conectada una casa.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="type">
+        <div class="fig">
+          <svg viewBox="0 0 320 180" role="img" aria-label="Circuito mixto: una resistencia en serie con dos en paralelo">
+            <path class="w" d="M50 60V30H240M50 120V150H240M170 30V150M240 30V150"/>
+            <circle class="dot" cx="170" cy="30" r="5"/><circle class="dot" cx="170" cy="150" r="5"/>
+            <g class="sym"><use href="#c-bat" transform="translate(50,90)"/><use href="#c-res" transform="translate(105,30)"/><use href="#c-res" transform="translate(170,90) rotate(90)"/><use href="#c-res" transform="translate(240,90) rotate(90)"/></g>
+            <text x="105" y="14" text-anchor="middle">R1</text><text x="196" y="94">R2</text><text x="266" y="94">R3</text>
+          </svg>
+        </div>
+        <div>
+          <h3>Circuito mixto</h3>
+          <p>Combina grupos en serie y grupos en paralelo. Se resuelve por partes: primero se reduce cada grupo a una sola resistencia equivalente.</p>
+          <p class="formula">Rt = R1 + (R2 ∥ R3)</p>
+          <ul>
+            <li>Primero calcula el paralelo: R2 ∥ R3 = (R2 × R3) / (R2 + R3).</li>
+            <li>Luego súmalo en serie con R1.</li>
+            <li>Con Rt obtienes la corriente total y, de ahí, el voltaje de cada parte.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cta"><a class="btn solid" href="simulador.html">Probarlo en el simulador</a></div>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="wrap">
+      <h2>Míralo en acción</h2>
+      <p>Un video que arma circuitos en serie y en paralelo paso a paso con bombillas.</p>
+      <div class="video">
+        <iframe src="https://www.youtube-nocookie.com/embed/-PiEy0lY1h8" title="Circuitos en serie y paralelo con Tinkercad" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <p class="note">Si el video no carga, <a href="https://www.youtube.com/watch?v=-PiEy0lY1h8" target="_blank" rel="noopener">ábrelo en YouTube</a>. Necesita conexión a internet.</p>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Circuitos eléctricos · Página educativa. <a href="simulador.html">Ir al simulador</a></div></footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
